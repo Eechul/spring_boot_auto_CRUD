@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${TARGET_PACKAGE}.${REPO_NAME}" >
+
+   <resultMap type="${VO_NAME}" id="${UPPER_NAMING}" autoMapping="true"></resultMap>
+	
+	<sql id="str_tb">${TABLE_NAME}</sql>
+	
+	<sql id="sql_${LOWER_NAMING}">
+		SELECT 
+			${COMMA_COLUMNS} 
+		FROM <include refid="str_tb" />
+	</sql>
+	
+	<select id="list" resultMap="${UPPER_NAMING}">
+		<include refid="sql_${LOWER_NAMING}"/> 
+		FROM <include refid="str_tb" />
+		<if test="page != null">
+		 LIMIT #{page.startRow},#{page.pageSize}
+		 </if>
+	</select>
+	
+	<select id="list_c" resultType="Long" useCache="false">
+		SELECT COUNT(*) FROM (<include refid="sql_${LOWER_NAMING}"/>) AS LIST
+	</select>
+	
+    <insert id="save" useGeneratedKeys="true">
+		INSERT <include refid="str_tb" /> SET
+			${PRINT_COLUMNS_AND_DATA}
+	</insert>
+	
+	<update id="update" useGeneratedKeys="true">
+		UPDATE <include refid="str_tb" /> 
+			SET 
+				${PRINT_COLUMNS_AND_DATA}
+		WHERE ${KEY_WHERE}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM <include refid="str_tb"/>
+		WHERE ${KEY_WHERE}
+	</delete>
+
+	<select id="findOne" resultMap="${UPPER_NAMING}">
+		<include refid="sql_${LOWER_NAMING}" />
+		WHERE ${KEY_WHERE}
+	</select>
+	
+	
+
+</mapper>

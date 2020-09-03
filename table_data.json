@@ -1,0 +1,51 @@
+{
+    "targetPackage" : "invoice.model.board",
+    "naming" : "BoardData",
+    "tableName" : "IV_BOARD_DATA_TB",
+    "columns" : [
+        {
+            "name": "NO",
+            "type" : "Long"
+        },
+        {
+            "name": "BOARD_NO",
+            "type" : "Long"
+        },
+        {
+            "name": "TITLE",
+            "type" : "String"
+        },
+        {
+            "name": "CONTENT",
+            "type" : "String"
+        },
+        {
+            "name": "WRITER_TYPE",
+            "type" : "String"
+        },
+        {
+            "name": "WRITER_CD",
+            "type" : "String"
+        },
+        {
+            "name": "NOTICE_FLAG",
+            "type" : "String"
+        },
+        {
+            "name": "STATUS",
+            "type" : "String"
+        },
+        {
+            "name": "REG_DATE",
+            "type" : "Timestamp"
+        },
+        {
+            "name": "UPDATE_DATE",
+            "type" : "Timestamp"
+        }
+    ],
+    "key" : "NO",
+    "keyType" : "Long",
+    "paging" : true,
+    "allListFlag" : false
+}

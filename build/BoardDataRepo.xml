@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="invoice.model.board.BoardDataRepo" >
+
+   <resultMap type="BoardDataVo" id="BOARD_DATA" autoMapping="true"></resultMap>
+	
+	<sql id="str_tb">IV_BOARD_DATA_TB</sql>
+	
+	<sql id="sql_board_data">
+		SELECT NO, 
+			BOARD_NO, 
+			TITLE, 
+			CONTENT, 
+			WRITER_TYPE, 
+			WRITER_CD, 
+			NOTICE_FLAG, 
+			STATUS, 
+			REG_DATE, 
+			UPDATE_DATE FROM <include refid="str_tb" />
+	</sql>
+	
+	<select id="list" resultMap="BOARD_DATA">
+		<include refid="sql_board_data"/>
+		<if test="page != null">
+		 LIMIT #{page.startRow},#{page.pageSize}
+		 </if>
+	</select>
+	
+	<select id="list_c" resultType="Long" useCache="false">
+		SELECT COUNT(*) FROM (<include refid="sql_board_data"/>) AS LIST
+	</select>
+	
+    <insert id="save" useGeneratedKeys="true">
+		INSERT <include refid="str_tb" /> SET
+			BOARD_NO = #{boardNo}, 
+			TITLE = #{title}, 
+			CONTENT = #{content}, 
+			WRITER_TYPE = #{writerType}, 
+			WRITER_CD = #{writerCd}, 
+			NOTICE_FLAG = #{noticeFlag}, 
+			STATUS = #{status}, 
+			REG_DATE = NOW(), 
+			UPDATE_DATE = NOW()
+	</insert>
+	
+	<update id="update" useGeneratedKeys="true">
+		UPDATE <include refid="str_tb" /> 
+			SET 
+				BOARD_NO = #{boardNo}, 
+			TITLE = #{title}, 
+			CONTENT = #{content}, 
+			WRITER_TYPE = #{writerType}, 
+			WRITER_CD = #{writerCd}, 
+			NOTICE_FLAG = #{noticeFlag}, 
+			STATUS = #{status}, 
+			REG_DATE = NOW(), 
+			UPDATE_DATE = NOW()
+		WHERE NO = #{no}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM <include refid="str_tb"/>
+		WHERE NO = #{no}
+	</delete>
+
+	<select id="findOne" resultMap="BOARD_DATA">
+		<include refid="sql_board_data" />
+		WHERE NO = #{no}
+	</select>
+	
+	
+
+</mapper>

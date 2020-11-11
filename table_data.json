@@ -1,7 +1,7 @@
 {
     "targetPackage" : "invoice.model.board",
-    "naming" : "BoardData",
-    "tableName" : "IV_BOARD_DATA_TB",
+    "naming" : "BoardPickupData",
+    "tableName" : "IV_BOARD_PICKUP_DATA_TB",
     "columns" : [
         {
             "name": "NO",
@@ -12,27 +12,31 @@
             "type" : "Long"
         },
         {
-            "name": "TITLE",
+            "name": "CUSTOMER_NAME",
             "type" : "String"
         },
         {
-            "name": "CONTENT",
-            "type" : "String"
-        },
-        {
-            "name": "WRITER_TYPE",
-            "type" : "String"
-        },
-        {
-            "name": "WRITER_CD",
-            "type" : "String"
-        },
-        {
-            "name": "NOTICE_FLAG",
-            "type" : "String"
+            "name": "DELIVERY_NUM",
+            "type" : "Long"
         },
         {
             "name": "STATUS",
+            "type" : "String"
+        },
+        {
+            "name": "REASON",
+            "type" : "String"
+        },
+        {
+            "name": "ORI_INVOICE_NUM",
+            "type" : "String"
+        },
+        {
+            "name": "PICKUP_INVOICE_NUM",
+            "type" : "String"
+        },
+        {
+            "name": "DESCRIPTION",
             "type" : "String"
         },
         {

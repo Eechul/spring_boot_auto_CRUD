@@ -34,7 +34,7 @@ const createXmlRepoContent = (package, naming, tableName, columns, key) => {
         columnNames = columns.map((obj) => obj.name),
         commaColumns = columnNames.join(', \n\t\t\t');
     var content = fs.readFileSync('./target/MyBatisRepo.xml', 'utf8');
-    content = content.replace(/\${TARGET_PACKAGE}/g, targetPackage);
+    content = content.replace(/\${TARGET_PACKAGE}/gi, targetPackage);
     content = content.replace(/\${REPO_NAME}/gi, repoName);
     content = content.replace(/\${VO_NAME}/gi, voName);
     content = content.replace(/\${TABLE_NAME}/g, tableName);
@@ -48,9 +48,8 @@ const createXmlRepoContent = (package, naming, tableName, columns, key) => {
     return content;
 }
 const createJavaRepoContent = (package, naming, key) => {
-
     var content = fs.readFileSync('./target/Repo.java', 'utf8');
-    content.replace(/\${TARGET_PACKAGE}/g, package);
+    content = content.replace(/\${TARGET_PACKAGE}/g, package);
     content = content.replace(/\${NAMING}/g, naming);
     naming = naming[0].toLowerCase() + naming.slice(1,naming.length);
     content = content.replace(/\${NAMING_FIRST_LOWER}/g, naming);
@@ -60,7 +59,7 @@ const createJavaRepoContent = (package, naming, key) => {
 }
 const createServiceContent = (package, naming, key) => {
     var content = fs.readFileSync('./target/Service.java', 'utf8');
-    content.replace(/\${TARGET_PACKAGE}/g, package);
+    content = content.replace(/\${TARGET_PACKAGE}/g, package);
     content = content.replace(/\${NAMING}/g, naming);
     naming = naming[0].toLowerCase() + naming.slice(1,naming.length);
     content = content.replace(/\${NAMING_FIRST_LOWER}/g, naming);
@@ -70,7 +69,7 @@ const createServiceContent = (package, naming, key) => {
 const createVoContent = (package, naming, columns) => {
 
     var content = fs.readFileSync('./target/Vo.java', 'utf8');
-    content.replace(/\${TARGET_PACKAGE}/g, package);
+    content = content.replace(/\${TARGET_PACKAGE}/g, package);
     content = content.replace(/\${NAMING}/g, naming);
     var privateVoStr = columns.map((obj) => {
         return `private ${obj.type} ${camelcase(obj.name)}`;
@@ -116,6 +115,7 @@ const createFiles = {
         )
     }
 }
+
 
 
 for(var key in createFiles) {

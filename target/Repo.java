@@ -1,4 +1,4 @@
-package ${TARGET_PACKAGE}
+package ${TARGET_PACKAGE};
 
 @Mapper
 public interface ${NAMING}Repo {
